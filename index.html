@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wash Your Hands Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+        }
+
+        header {
+            background-color: #4caf50;
+            color: white;
+            padding: 1rem 0;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .header-image {
+            max-width: 150px;
+            display: block;
+            margin: 1rem auto;
+        }
+
+        .container {
+            padding: 2rem;
+        }
+
+        .reminder {
+            background-color: #fff;
+            border: 2px solid #4caf50;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 1rem auto;
+            max-width: 600px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .reminder h2 {
+            color: #4caf50;
+            font-size: 2rem;
+        }
+
+        .steps {
+            text-align: left;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .steps li {
+            margin: 0.5rem 0;
+            animation: slideIn 1s ease-in-out;
+            opacity: 1;
+            animation-fill-mode: forwards;
+        }
+
+        .steps li img {
+            max-width: 50px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .steps li:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        .steps li:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .steps li:nth-child(3) {
+            animation-delay: 1.5s;
+        }
+
+        .steps li:nth-child(4) {
+            animation-delay: 2s;
+        }
+
+        .steps li:nth-child(5) {
+            animation-delay: 2.5s;
+        }
+
+        .wash-hands-btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        .wash-hands-btn:hover {
+            background-color: #45a049;
+        }
+
+        #timer {
+            font-size: 2rem;
+            margin-top: 1rem;
+            color: #4caf50;
+            animation: colorChange 20s linear;
+        }
+
+        #timer.running {
+            animation: pulse 1s infinite;
+        }
+
+        footer {
+            margin-top: 2rem;
+            background-color: #333;
+            color: white;
+            padding: 1rem 0;
+        }
+
+        footer img {
+            max-width: 30px;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes colorChange {
+            from { color: #4caf50; }
+            to { color: #e74c3c; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+    <script>
+        let timer;
+
+        function startTimer() {
+            let timeLeft = 60;
+            const timerElement = document.getElementById('timer');
+            const gifElement = document.getElementById('washing-gif');
+            timerElement.textContent = `Time Left: ${timeLeft}s`;
+            timerElement.classList.add('running');
+            gifElement.style.display = 'block';
+
+            timer = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = `Time Left: ${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    timerElement.textContent = "All Done! Great Job!";
+                    timerElement.classList.remove('running');
+                    gifElement.style.display = 'none'; 
+                }
+            }, 1000);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Wash Your Hands!</h1>
+        <img src="cartoon-handwashing-header.png" alt="Cartoon Handwashing" class="header-image">
+    </header>
+
+    <div class="container">
+        <div class="reminder">
+            <h2>Stay Healthy!</h2>
+            <p>Remember to wash your hands regularly to stay clean and germ-free.</p>
+
+            <ul class="steps">
+                <li><img src="footer-cartoon.png" alt="Water">1. Wet your hands with clean water.</li>
+                <li><img src="step2.png" alt="Soap">2. Apply soap and lather well.</li>
+                <li><img src="step3.png" alt="Scrubbing">3. Scrub your hands for at least 20 seconds.</li>
+                <li><img src="step4.png" alt="Rinsing">4. Rinse your hands under clean water.</li>
+                <li><img src="step5.png" alt="Drying">5. Dry your hands with a clean towel or air dry them.</li>
+            </ul>
+
+            <button class="wash-hands-btn" onclick="startTimer()">Start Washing Now!</button>
+            <div id="timer"></div>
+        </div>       
+    </div>
+    <div id="washing-gif" style="display: none; text-align: center; margin-top: 1rem;">
+        <img src="kid-washing-hands.gif" alt="Kid Washing Hands" style="max-width: 300px; border-radius: 10px;">
+    </div>
+    
+
+    <footer>
+        <p>Handwashing Reminder Project | Made with ❤️ <img src="footer-cartoon.png" alt="Smiley"></p>
+    </footer>
+</body>
+</html>
